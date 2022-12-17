@@ -59,10 +59,7 @@ module.exports.searchUserPosts = async (req, res) => {
       });
     }
   } catch (error) {
-    res.status(400).json({
-      error: error.message,
-      status: "no post found",
-    });
+    res.status(400).send(error.message)
   }
 };
 

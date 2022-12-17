@@ -34,6 +34,22 @@ router.post("/api/post/create", async (req, res, next) => {
 }, postController.create)
 
 // updating a  post
+
+// deleting  a post
+router.delete(
+  "/api/post/:id", authenticate.auth, postController.deletePostById
+);
+
+
+router.get(
+  "/api/post/myposts/",
+  authenticate.auth,
+  postController.searchUserPosts
+);
+router.get("/api/post/recent", postController.getRecentPosts)
+
+// get all posts 
+router.get("/api/post/allposts", postController.getAllPosts);
 router.put("/api/post/:id", authenticate.auth, async (req, res, next) => {
   let file = null
 
@@ -63,26 +79,10 @@ router.put("/api/post/:id", authenticate.auth, async (req, res, next) => {
 
 }, postController.updatePostById);
 
-
-// deleting  a post
-router.delete(
-  "/api/post/:id", authenticate.auth, postController.deletePostById
-);
-
-
 // get recent posts
-router.get("/api/post/recent", postController.getRecentPosts)
-
-// get all posts 
-router.get("/api/post/allposts", postController.getAllPosts);
 
 
 /// get logged in user post  posts 
-router.get(
-  "/api/post/myposts/",
-  authenticate.auth,
-  postController.searchUserPosts
-);
 
 // single post 
 router.get("/api/post/:id", postController.getPostById);
